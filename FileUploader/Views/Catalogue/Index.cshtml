@@ -1,0 +1,34 @@
+﻿@model CatalogueData
+<div class="row">
+    <div class="video-container">
+        <video id="video" autoplay controls src="/media/@Model.SelectedFile?.FileName"></video>
+    </div>
+</div>
+<div class="row">
+    <div class="col-9">
+        <b>Video File Name</b>
+    </div>
+    <div class="col-3">
+        <b>File Size</b>
+    </div>
+</div>
+@foreach (var item in Model.Videos)
+{
+    <div class="row"style="cursor:default" onclick="updateVideo('@item.FileName')">
+    <div class="col-9">
+        @item.FileName
+    </div>
+    <div class="col-3">
+        @item.FileSize
+    </div>
+</div>
+}
+<link href="~/css/catalogue.css" rel="stylesheet" />
+
+<script>
+    function updateVideo(fileName) { 
+        video = document.querySelector("video");
+        video.src = '/media/' + fileName;
+        video.play();
+    }
+</script>

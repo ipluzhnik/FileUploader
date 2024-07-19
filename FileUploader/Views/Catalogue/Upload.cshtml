@@ -1,0 +1,44 @@
+﻿<h2>Choose mp4 files to upload to the video catalogue</h2>
+<span id="errorMessage"></span>
+<form id="form" name="form" action="/uploader" enctype="multipart/form-data" method="post">
+    <input id="files" name="files" type="file" size="1" multiple onchange="enableButton();"  />
+    <br />
+    <br />
+    <br />
+    <input id="upload" type="button" onclick="uploadFiles();" value="Upload" disabled />
+</form>
+
+<script>
+    function enableButton() { 
+        var input = document.getElementById('files');
+        var files = input.files;
+        document.getElementById('upload').disabled = files.length == 0;
+
+    }
+    function uploadFiles(inputId) {
+        var input = document.getElementById('files');
+        var files = input.files;
+        var formData = new FormData();
+
+        for (var i = 0; i != files.length; i++) {
+            formData.append("files", files[i]);
+        }
+        $.ajax(
+            {
+                url: "/api/upload",
+                data: formData,
+                processData: false,
+                contentType: false,
+                type: "POST",
+                success: function (data) {
+                    location.href = "/catalogue";
+                },
+                error: function (data) {
+                    document.getElementById("errorMessage").textContent = data.responseText;
+                }
+            }
+        );
+    }
+</script>
+
+
