@@ -14,7 +14,7 @@ namespace FileUploader.Controllers.Helpers
             {
                 if (file.Extension.ToLower()==".mp4")
                 {
-                    result.Videos.Add(new FileMetaData { FileName = file.Name, FileSize = file.Length });
+                    result.Videos.Add(new FileMetaData { FileName = file.Name, FileSize = file.Length/1024 });
                 }
             }
             if (result.Videos.Count>0)

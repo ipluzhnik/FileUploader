@@ -1,4 +1,5 @@
 ﻿@model CatalogueData
+<h1>Select a video from the table to start playback</h1>
 <div class="row">
     <div class="video-container">
         <video id="video" autoplay controls src="/media/@Model.SelectedFile?.FileName"></video>
@@ -9,12 +10,12 @@
         <b>Video File Name</b>
     </div>
     <div class="col-3">
-        <b>File Size</b>
+        <b>File Size KB</b>
     </div>
 </div>
 @foreach (var item in Model.Videos)
 {
-    <div class="row"style="cursor:default" onclick="updateVideo('@item.FileName')">
+    <div class="row" style="cursor:default;" onclick="updateVideo('@item.FileName')">
     <div class="col-9">
         @item.FileName
     </div>
